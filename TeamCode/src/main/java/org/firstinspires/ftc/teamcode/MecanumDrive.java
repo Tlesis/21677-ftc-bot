@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.IMU;
 
 @TeleOp
 public class MecanumDrive extends OpMode {
@@ -20,7 +22,7 @@ public class MecanumDrive extends OpMode {
         br = hardwareMap.get(DcMotor.class, "backRight");
         bl = hardwareMap.get(DcMotor.class, "backLeft");
 
-        fr.setDirection(DcMotorSimple.Direction.REVERSE);
+        fl.setDirection(DcMotorSimple.Direction.REVERSE);
         br.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
@@ -36,9 +38,10 @@ public class MecanumDrive extends OpMode {
         double backRightPower = (y + x - theta) / denominator;
         double backLeftPower = (y - x + theta) / denominator;
 
-        fr.setPower(frontRightPower);
-        fl.setPower(frontLeftPower);
-        br.setPower(backRightPower);
-        bl.setPower(backLeftPower);
+        double mod = (gamepad1.b) ? 2.5 : 1.0;
+        fr.setPower(frontRightPower / mod);
+        fl.setPower(frontLeftPower / mod);
+        br.setPower(backRightPower / mod);
+        bl.setPower(backLeftPower / mod);
     }
 }
