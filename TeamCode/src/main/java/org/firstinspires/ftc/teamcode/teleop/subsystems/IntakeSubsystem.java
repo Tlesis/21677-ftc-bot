@@ -21,13 +21,15 @@ public class IntakeSubsystem extends Subsystem {
 
     @Override
     public void run(Gamepad driver, Gamepad manipulator) {
-        boolean intake =  manipulator.a;
-        boolean mod = manipulator.left_bumper;
+        if (!manipulator.left_bumper) {
+            intakeMotor.setPower(0.0);
+            return;
+        }
 
-        double speed = (intake) ? 1.0 : 0.0;
-        speed *= (mod) ? -1 : 1;
-
-        intakeMotor.setPower(speed);
+        intakeMotor.setPower(
+                (manipulator.back) ?
+                        -1.0 :
+                        1.0);
     }
 
     @Override

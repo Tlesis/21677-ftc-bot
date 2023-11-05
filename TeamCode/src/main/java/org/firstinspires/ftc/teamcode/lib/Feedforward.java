@@ -5,11 +5,11 @@ import java.util.function.DoubleSupplier;
 public class Feedforward {
 
     public final double ks;
-    public final double kg;
+    public final DoubleSupplier kg;
     public final double kv;
     public final double ka;
 
-    public Feedforward(double ks, double kg,
+    public Feedforward(double ks, DoubleSupplier kg,
                        double kv, double ka) {
         this.ks = ks;
         this.kg = kg;
@@ -17,14 +17,14 @@ public class Feedforward {
         this.ka = ka;
     }
 
-    public Feedforward(double ks, double kg, double kv) {
+    public Feedforward(double ks, DoubleSupplier kg, double kv) {
         this(ks, kg, kv, 0);
     }
 
     public double calculate(double positionRadians,
                             double velocityRadPerSec, double accelRadPerSecSquared) {
         return ks * Math.signum(velocityRadPerSec)
-                + kg * Math.cos(positionRadians)
+                + kg.getAsDouble() * Math.cos(positionRadians)
                 + kv * velocityRadPerSec
                 + ka * accelRadPerSecSquared;
     }
@@ -35,7 +35,7 @@ public class Feedforward {
 
     public double maxAchievableVelocity(double maxVoltage, double angle, double acceleration) {
         // Assume max velocity is positive
-        return (maxVoltage - ks - Math.cos(angle) * kg
+        return (maxVoltage - ks - Math.cos(angle) * kg.getAsDouble()
                 - acceleration * ka) / kv;
     }
 }

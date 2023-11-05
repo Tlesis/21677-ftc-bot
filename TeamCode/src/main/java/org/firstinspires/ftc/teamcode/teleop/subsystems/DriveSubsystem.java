@@ -33,7 +33,7 @@ public class DriveSubsystem extends Subsystem {
 
         IMU.Parameters parameters = new IMU.Parameters(
                 new RevHubOrientationOnRobot(
-                        RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                        RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
                         RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
         gyro.initialize(parameters);
     }

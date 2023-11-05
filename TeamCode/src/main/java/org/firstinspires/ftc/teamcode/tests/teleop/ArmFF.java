@@ -11,10 +11,7 @@ import org.firstinspires.ftc.teamcode.lib.Feedforward;
 @TeleOp
 public class ArmFF extends OpMode {
 
-    private double ks = 0;
-    private double kg = 0;
-    private double kv = 0;
-    private double ka = 0;
+
 
     private ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
     private double lastTime = 0;
@@ -22,7 +19,13 @@ public class ArmFF extends OpMode {
     private DcMotor leftArmMotor = null;
     private DcMotor  rightArmMotor = null;
 
-    private Feedforward feedforward = new Feedforward(ks, kg, kv, ka);
+    private double
+            ks = 0,
+            kg = 0,
+            kv = 0,
+            ka = 0;
+
+    private Feedforward feedforward = new Feedforward(ks, () -> kg, kv, ka);
 
     @Override
     public void init() {
