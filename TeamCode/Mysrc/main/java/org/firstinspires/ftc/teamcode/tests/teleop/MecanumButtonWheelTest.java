@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.tests.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -21,10 +21,8 @@ public class MecanumButtonWheelTest extends OpMode {
         br = hardwareMap.get(DcMotor.class, "backRight");
         bl = hardwareMap.get(DcMotor.class, "backLeft");
 
-        fr.setDirection(DcMotorSimple.Direction.FORWARD);
-        fl.setDirection(DcMotorSimple.Direction.FORWARD);
-        br.setDirection(DcMotorSimple.Direction.FORWARD);
-        bl.setDirection(DcMotorSimple.Direction.FORWARD);
+        fr.setDirection(DcMotorSimple.Direction.REVERSE);
+        bl.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     /**

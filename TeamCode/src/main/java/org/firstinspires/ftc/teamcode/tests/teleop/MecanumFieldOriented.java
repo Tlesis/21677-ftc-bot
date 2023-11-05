@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.tests.teleop;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -26,27 +26,27 @@ public class MecanumFieldOriented extends OpMode {
         br = hardwareMap.get(DcMotor.class, "backRight");
         bl = hardwareMap.get(DcMotor.class, "backLeft");
 
-        fl.setDirection(DcMotorSimple.Direction.REVERSE);
-        br.setDirection(DcMotorSimple.Direction.REVERSE);
+        fr.setDirection(DcMotorSimple.Direction.REVERSE);
+        bl.setDirection(DcMotorSimple.Direction.REVERSE);
 
         gyro = hardwareMap.get(IMU.class, "imu");
 
         IMU.Parameters parameters = new IMU.Parameters(
                 new RevHubOrientationOnRobot(
                     RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                    RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD));
+                    RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
         gyro.initialize(parameters);
     }
 
     @Override
     public void loop() {
-        double y = -gamepad1.left_stick_y;
-        double x = gamepad1.left_stick_x;
-        double theta = gamepad1.right_stick_x;
+        double y = -gamepad2.left_stick_y;
+        double x = gamepad2.left_stick_x;
+        double theta = gamepad2.right_stick_x;
 
         telemetry.addData("gyro yaw", gyro.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES));
 
-        if (gamepad1.start) {
+        if (gamepad2.start) {
             gyro.resetYaw();
         }
 
@@ -63,7 +63,7 @@ public class MecanumFieldOriented extends OpMode {
         double frontRightPower = (rotY - rotX - theta) / denominator;
         double backRightPower = (rotY + rotX - theta) / denominator;
 
-        double mod = (gamepad1.b) ? 2.5 : 1.0;
+        double mod = (gamepad2.b) ? 2.5 : 1.0;
         fl.setPower(frontLeftPower / mod);
         bl.setPower(backLeftPower / mod);
         fr.setPower(frontRightPower / mod);
