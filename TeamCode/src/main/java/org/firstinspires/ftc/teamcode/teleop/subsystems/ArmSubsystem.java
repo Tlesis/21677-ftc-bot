@@ -35,10 +35,10 @@ public class ArmSubsystem extends Subsystem {
         boolean allowExtenderMovement = true;
 
         // check states
-        if ((rotator.avgPosition() <= MIN_ROTATOR_ANGLE) && (extender.position() > MAX_EXTEND_MOVE))
+        if ((rotator.position() <= MIN_ROTATOR_ANGLE) && (extender.position() > MAX_EXTEND_MOVE))
             allowRotatorMovement = false;
 
-        if ((rotator.avgPosition() >= MIN_ROTATOR_ANGLE))
+        if ((rotator.position() >= MIN_ROTATOR_ANGLE))
             allowExtenderMovement = false;
 
         // manage extender
@@ -51,9 +51,9 @@ public class ArmSubsystem extends Subsystem {
         }
 
         // manage rotator
-        if (manipulator.y && (rotator.avgPosition() > rotator.MAX_ROTATION)) {
+        if (manipulator.y && (rotator.position() > rotator.MAX_ROTATION)) {
             rotator.set(0.75);
-        } else if (manipulator.a && allowRotatorMovement && (rotator.avgPosition() > rotator.MIN_ROTATION)) {
+        } else if (manipulator.a && allowRotatorMovement && (rotator.position() > rotator.MIN_ROTATION)) {
             rotator.set(-0.75);
         } else {
             rotator.set(0.0);

@@ -7,27 +7,24 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
 public class ArmMotor extends OpMode {
-    private DcMotor leftArmMotor = null;
-    private DcMotor  rightArmMotor = null;
+    private DcMotor armMotor = null;
 
     @Override
     public void init() {
-        leftArmMotor = hardwareMap.get(DcMotor.class, "lArmMotor");
-        rightArmMotor = hardwareMap.get(DcMotor.class, "rArmMotor");
+        armMotor = hardwareMap.get(DcMotor.class, "armMotor");
 
-        leftArmMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightArmMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        telemetry.addData("left encoder: ", "%.3f", leftArmMotor.getCurrentPosition());
-        telemetry.addData("right encoder: ", "%.3f", rightArmMotor.getCurrentPosition());
+        armMotor.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
     @Override
     public void loop() {
-        double y =  gamepad1.left_stick_y;
-        telemetry.update();
+        telemetry.addData("rotator encoder", armMotor.getCurrentPosition());
 
-        leftArmMotor.setPower(y);
-        rightArmMotor.setPower(y);
+        if (gamepad1.y)
+            armMotor.setPower(0.5);
+        else if (gamepad1.a)
+            armMotor.setPower(-0.5);
+        else
+            armMotor.setPower(0.0);
     }
 }

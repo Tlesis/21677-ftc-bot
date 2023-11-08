@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Subsystems extends Subsystem {
-    private List<Subsystem> subsystems = new ArrayList<>();
+    public static List<Subsystem> subsystems = new ArrayList<>();
+
     @Override
     public void init(HardwareMap hardwareMap) {
         for (Subsystem s : subsystems)

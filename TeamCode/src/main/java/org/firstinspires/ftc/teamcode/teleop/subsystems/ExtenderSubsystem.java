@@ -14,17 +14,14 @@ public class ExtenderSubsystem extends Subsystem {
 
     private DcMotor extender;
 
-    public static final double MIN_ENCODER = 0.0;
-    public static final double MAX_ENCODER = 200; // FIXME
-    private double encoderOffset;
+    public static final int MIN_ENCODER = 0;
+    public static final int MAX_ENCODER = 1900;
 
     @Override
     public void init(HardwareMap hardwareMap) {
         extender = hardwareMap.get(DcMotor.class, "extender");
 
         extender.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        encoderOffset = extender.getCurrentPosition();
-        extender.setDirection(DcMotorSimple.Direction.FORWARD); // TODO: Might need to be reversed
     }
 
     @Override
@@ -32,12 +29,20 @@ public class ExtenderSubsystem extends Subsystem {
 
     @Override
     public void telemetry(Telemetry telemetry) {
-        telemetry.addData("extender", "%.3f", extender.getCurrentPosition());
+        telemetry.addData("extender", extender.getCurrentPosition());
     }
 
     public double position() { return extender.getCurrentPosition(); }
 
-    public void extend() { extender.setPower(1.0); }
-    public void retract() { extender.setPower(-1.0); }
+    public void extend() {
+        if (position() < MAX_ENCODER)
+            extender.setPower(1.0);
+    }
+
+    public void retract() {
+        if (position() > MIN_ENCODER)
+            extender.setPower(-1.0);
+    }
+
     public void stop() { extender.setPower(0.0); }
 }

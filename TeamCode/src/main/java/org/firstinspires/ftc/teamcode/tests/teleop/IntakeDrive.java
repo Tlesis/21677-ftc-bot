@@ -13,8 +13,6 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.teamcode.helpers.IntakeHelper;
-import org.firstinspires.ftc.teamcode.helpers.MecanumHelper;
 
 @TeleOp
 public class IntakeDrive extends OpMode {

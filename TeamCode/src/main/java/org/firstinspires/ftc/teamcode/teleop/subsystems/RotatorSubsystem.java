@@ -1,51 +1,36 @@
 package org.firstinspires.ftc.teamcode.teleop.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.lib.Feedforward;
 import org.firstinspires.ftc.teamcode.lib.Subsystem;
 
 import java.util.function.DoubleSupplier;
 
 public class RotatorSubsystem extends Subsystem {
 
-    private DcMotor left, right;
+    private DcMotor rotator;
 
-    private Feedforward feedforward;
     private double lastTime, lastPosition;
     private ElapsedTime time;
-    private double
-            ks = 0,
-            kv = 0;
 
     // FIXME: S.W.A.G.
     public static final double MAX_ROTATION = (3.0 * Math.PI) / 4.0;
     public static final double MIN_ROTATION = -Math.PI / 6.0;
 
-    public RotatorSubsystem(ExtenderSubsystem extender) {
-        feedforward = new Feedforward(
-                ks,
-                () -> kG(() -> extender.position()),
-                kv);
-
+    public RotatorSubsystem() {
         time = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
     }
 
     @Override
     public void init(HardwareMap hardwareMap) {
-        left = hardwareMap.get(DcMotor.class, "lArmMotor");
-        right = hardwareMap.get(DcMotor.class, "rArmMotor");
-
-        left.setDirection(DcMotorSimple.Direction.FORWARD);
-        right.setDirection(DcMotorSimple.Direction.REVERSE);
+        rotator = hardwareMap.get(DcMotor.class, "armMotor");
 
         lastTime = time.time();
-        lastPosition = avgPosition();
+        lastPosition = position();
     }
 
     @Override
@@ -53,32 +38,21 @@ public class RotatorSubsystem extends Subsystem {
 
     @Override
     public void telemetry(Telemetry telemetry) {
-        telemetry.addData("rotator avg pos (rad/s)", "%.3f", avgPosition());
-        telemetry.addData("rotator avg vel (rad/s/s)", "%.3f", avgVelocity());
-
-        // TODO: remove
-        double ff = feedforward.calculate(avgPosition(), avgVelocity());
-        telemetry.addData("ff", "%.3f", ff);
+        telemetry.addData("rotator avg pos (rad/s)", "%.3f", position());
+        telemetry.addData("rotator avg vel (rad/s/s)", "%.3f", velocity());
     }
 
     public void set(double power) {
-        double ff = feedforward.calculate(avgPosition(), avgVelocity());
-        power += ff;
-
-        left.setPower(power);
-        right.setPower(power);
+        rotator.setPower(power);
     }
 
-    public double avgPosition() {
+    public double position() {
         final double tick2Rad = 1.0; // FIXME
-        double l = left.getCurrentPosition() * tick2Rad;
-        double r = right.getCurrentPosition() * tick2Rad;
-
-        return ((l + r) / 2);
+        return (rotator.getCurrentPosition() * tick2Rad);
     }
 
-    public double avgVelocity() {
-        double pos = avgPosition();
+    public double velocity() {
+        double pos = position();
         double tF = time.time();
 
         double dDisplacement = pos - lastPosition;
@@ -90,9 +64,5 @@ public class RotatorSubsystem extends Subsystem {
         lastTime = tF;
 
         return dV;
-    }
-
-    public double kG(DoubleSupplier extenderEncoder) {
-        return 0.0;
     }
 }
