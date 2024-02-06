@@ -9,7 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Subsystem {
+    protected TelemetryMode printMode;
+
+    public Subsystem(TelemetryMode mode) { printMode = mode; }
     public abstract void init(HardwareMap hardwareMap);
     public abstract void run(Gamepad driver, Gamepad manipulator);
     public void telemetry(Telemetry telemetry) {}
+
+    public TelemetryMode getMode() { return printMode; }
+
+    public enum TelemetryMode {
+        PRINT,
+        SILENT;
+    }
 }

@@ -12,6 +12,10 @@ public class IntakeSubsystem extends Subsystem {
 
     private DcMotor intakeMotor;
 
+    public IntakeSubsystem(TelemetryMode mode) {
+        super(mode);
+    }
+
     @Override
     public void init(HardwareMap hardwareMap) {
         intakeMotor = hardwareMap.get(DcMotor.class, "intake");
@@ -26,12 +30,15 @@ public class IntakeSubsystem extends Subsystem {
             return;
         }
 
-        intakeMotor.setPower(
-                (manipulator.back) ?
-                        -1.0 :
-                        1.0);
+        set((manipulator.back) ?
+                -1.0 :
+                1.0);
     }
 
     @Override
     public void telemetry(Telemetry telemetry) {}
+
+    public void set(double power) {
+        intakeMotor.setPower(power);
+    }
 }

@@ -7,29 +7,31 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.lib.Subsystem;
 
-public class CageSubsystem extends Subsystem {
-    private Servo cage;
+public class DroneSubsystem extends Subsystem {
 
-    public CageSubsystem(TelemetryMode mode) {
+    private Servo drone;
+
+    public DroneSubsystem(TelemetryMode mode) {
         super(mode);
     }
 
     @Override
     public void init(HardwareMap hardwareMap) {
-        cage = hardwareMap.get(Servo.class, "cage");
+        drone = hardwareMap.get(Servo.class, "drone");
     }
 
     @Override
     public void run(Gamepad driver, Gamepad manipulator) {
-        if (manipulator.right_bumper) {
-            cage.setPosition(0.3);
+        if (manipulator.start) {
+            drone.setPosition(0.0);
         } else {
-            cage.setPosition(0.15);
+            drone.setPosition(0.5);
         }
+
     }
 
     @Override
     public void telemetry(Telemetry telemetry) {
-        telemetry.addData("cage", "%.3f", cage.getPosition());
+        telemetry.addData("drone", drone.getPosition());
     }
 }

@@ -12,6 +12,10 @@ import java.util.List;
 public class Subsystems extends Subsystem {
     public static List<Subsystem> subsystems = new ArrayList<>();
 
+    public Subsystems() {
+        super(TelemetryMode.PRINT);
+    }
+
     @Override
     public void init(HardwareMap hardwareMap) {
         for (Subsystem s : subsystems)
@@ -28,7 +32,8 @@ public class Subsystems extends Subsystem {
     @Override
     public void telemetry(Telemetry telemetry) {
         for (Subsystem s : subsystems) {
-            s.telemetry(telemetry);
+            if (s.getMode() == TelemetryMode.PRINT)
+                s.telemetry(telemetry);
         }
     }
 
