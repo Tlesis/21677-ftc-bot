@@ -24,9 +24,8 @@ public class Subsystems extends Subsystem {
 
     @Override
     public void run(Gamepad driver, Gamepad manipulator) {
-       for (Subsystem s : subsystems) {
+       for (Subsystem s : subsystems)
            s.run(driver, manipulator);
-       }
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.teleop.subsystems.CageSubsystem;
+import org.firstinspires.ftc.teamcode.teleop.subsystems.ClimbSubsystem;
 import org.firstinspires.ftc.teamcode.teleop.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.teleop.subsystems.DroneSubsystem;
 import org.firstinspires.ftc.teamcode.teleop.subsystems.ExtenderSubsystem;
@@ -23,8 +24,9 @@ public class Teleop extends OpMode {
     private CageSubsystem cage          = new CageSubsystem(TelemetryMode.SILENT);
     private DroneSubsystem drone        = new DroneSubsystem(TelemetryMode.SILENT);
     private RotatorSubsystem rotator    = new RotatorSubsystem(TelemetryMode.SILENT);
+    // private ClimbSubsystem climb        = new ClimbSubsystem(TelemetryMode.SILENT);
 
-    private ExtenderSubsystem extender  = new ExtenderSubsystem(TelemetryMode.SILENT);
+    private ExtenderSubsystem extender  = new ExtenderSubsystem(TelemetryMode.PRINT);
     private VisionSubsystem vision      = new VisionSubsystem(TelemetryMode.PRINT);
 
     @Override
@@ -34,6 +36,7 @@ public class Teleop extends OpMode {
         subsystems.add(cage);
         subsystems.add(drone);
         subsystems.add(rotator);
+        // subsystems.add(climb);
         subsystems.add(extender);
         subsystems.add(vision);
 
