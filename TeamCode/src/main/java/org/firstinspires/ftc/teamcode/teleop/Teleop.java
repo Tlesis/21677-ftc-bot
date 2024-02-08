@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.teleop.subsystems.RotatorSubsystem;
 import org.firstinspires.ftc.teamcode.teleop.subsystems.Subsystems;
 
 import org.firstinspires.ftc.teamcode.lib.Subsystem.TelemetryMode;
+import org.firstinspires.ftc.teamcode.teleop.subsystems.VisionSubsystem;
 
 @TeleOp
 public class Teleop extends OpMode {
@@ -19,10 +20,12 @@ public class Teleop extends OpMode {
 
     private DriveSubsystem drive        = new DriveSubsystem(TelemetryMode.SILENT);
     private IntakeSubsystem intake      = new IntakeSubsystem(TelemetryMode.SILENT);
-    private CageSubsystem cage          = new CageSubsystem(TelemetryMode.PRINT);
+    private CageSubsystem cage          = new CageSubsystem(TelemetryMode.SILENT);
     private DroneSubsystem drone        = new DroneSubsystem(TelemetryMode.SILENT);
-    private RotatorSubsystem rotator    = new RotatorSubsystem(TelemetryMode.PRINT);
-    private ExtenderSubsystem extender  = new ExtenderSubsystem(TelemetryMode.PRINT);
+    private RotatorSubsystem rotator    = new RotatorSubsystem(TelemetryMode.SILENT);
+
+    private ExtenderSubsystem extender  = new ExtenderSubsystem(TelemetryMode.SILENT);
+    private VisionSubsystem vision      = new VisionSubsystem(TelemetryMode.PRINT);
 
     @Override
     public void init() {
@@ -32,6 +35,7 @@ public class Teleop extends OpMode {
         subsystems.add(drone);
         subsystems.add(rotator);
         subsystems.add(extender);
+        subsystems.add(vision);
 
         subsystems.init(hardwareMap);
     }

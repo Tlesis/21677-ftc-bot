@@ -23,9 +23,9 @@ public class DroneSubsystem extends Subsystem {
     @Override
     public void run(Gamepad driver, Gamepad manipulator) {
         if (manipulator.start) {
-            drone.setPosition(0.0);
+            drone.setPosition(0.4);
         } else {
-            drone.setPosition(0.5);
+            drone.setPosition(0.0);
         }
 
     }
