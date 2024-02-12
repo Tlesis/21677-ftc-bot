@@ -35,17 +35,19 @@ public class BackdropRed extends OpMode {
         }
 
         if (time() < 0.5)
-            drive.drive(0.0, 0.45, 0.0);
+            drive.drive(0.0, 0.53, 0.0);
         else if (time() < 2.0)
-            drive.drive(0.45, 0, 0); // drive up to spike mark
+            drive.drive(0.52, 0, 0); // drive up to spike mark
         else if (time() < 2.5)
             drive.stop(); // stop
         else if (time() < 3.5)
             intake.set(-0.5); // spit pixel if it is there
         else if (time() < 4.5)
             intake.set(0.0); // stop intake
-        else if (time() < 6.5)
-            drive.drive(0, 0.45, 0.0); // strafe into park
+        else if (time() < 5.0)
+            drive.drive(0.25, 0.0, 0.0); // extra drive
+        else if (time() < 6.2)
+            drive.drive(0, 0.0, 0.45); // turn
         else
             drive.stop();
 

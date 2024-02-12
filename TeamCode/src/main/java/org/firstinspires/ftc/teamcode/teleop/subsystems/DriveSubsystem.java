@@ -26,7 +26,6 @@ public class DriveSubsystem extends Subsystem {
         bl = hardwareMap.get(DcMotor.class, "backLeft");
 
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
-        bl.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     @Override

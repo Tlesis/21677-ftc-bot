@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.lib.Subsystem;
 public class ExtenderSubsystem extends Subsystem {
     private DcMotor extender;
 
-    private static final double MIN_EXTEND = 300;
-    private static final double MAX_EXTEND = 10000;
+    private static final double MIN_EXTEND = -300;
+    private static final double MAX_EXTEND = -10000;
 
     public ExtenderSubsystem(TelemetryMode mode) {
         super(mode);
@@ -25,11 +25,11 @@ public class ExtenderSubsystem extends Subsystem {
 
     @Override
     public void run(Gamepad driver, Gamepad manipulator) {
-        if (manipulator.b && extender.getCurrentPosition() <= MAX_EXTEND)
-            extender.setPower(-1);
-        else if (manipulator.x && extender.getCurrentPosition() >= MIN_EXTEND)
-            extender.setPower(1);
-        else
+        // if (manipulator.b && extender.getCurrentPosition() >= MAX_EXTEND)
+        //     extender.setPower(-1);
+        // else if (manipulator.x && extender.getCurrentPosition() <= MIN_EXTEND)
+        //     extender.setPower(1);
+        // else
             extender.setPower(0);
     }
 

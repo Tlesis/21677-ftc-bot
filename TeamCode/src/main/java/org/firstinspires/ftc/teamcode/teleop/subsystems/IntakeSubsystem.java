@@ -25,7 +25,7 @@ public class IntakeSubsystem extends Subsystem {
 
     @Override
     public void run(Gamepad driver, Gamepad manipulator) {
-        if (!manipulator.left_bumper) {
+        if (!manipulator.right_bumper) {
             intakeMotor.setPower(0.0);
             return;
         }

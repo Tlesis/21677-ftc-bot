@@ -24,10 +24,10 @@ public class Teleop extends OpMode {
     private CageSubsystem cage          = new CageSubsystem(TelemetryMode.SILENT);
     private DroneSubsystem drone        = new DroneSubsystem(TelemetryMode.SILENT);
     private RotatorSubsystem rotator    = new RotatorSubsystem(TelemetryMode.SILENT);
-    // private ClimbSubsystem climb        = new ClimbSubsystem(TelemetryMode.SILENT);
+    private ClimbSubsystem climb        = new ClimbSubsystem(TelemetryMode.SILENT);
 
     private ExtenderSubsystem extender  = new ExtenderSubsystem(TelemetryMode.PRINT);
-    private VisionSubsystem vision      = new VisionSubsystem(TelemetryMode.PRINT);
+    // private VisionSubsystem vision      = new VisionSubsystem(TelemetryMode.PRINT);
 
     @Override
     public void init() {
@@ -36,9 +36,9 @@ public class Teleop extends OpMode {
         subsystems.add(cage);
         subsystems.add(drone);
         subsystems.add(rotator);
-        // subsystems.add(climb);
+        subsystems.add(climb);
         subsystems.add(extender);
-        subsystems.add(vision);
+        // subsystems.add(vision);
 
         subsystems.init(hardwareMap);
     }

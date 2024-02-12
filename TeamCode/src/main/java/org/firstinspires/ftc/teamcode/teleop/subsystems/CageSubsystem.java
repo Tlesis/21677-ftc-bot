@@ -21,7 +21,7 @@ public class CageSubsystem extends Subsystem {
 
     @Override
     public void run(Gamepad driver, Gamepad manipulator) {
-        if (manipulator.right_bumper) {
+        if (manipulator.left_bumper) {
             cage.setPosition(0.3);
         } else {
             cage.setPosition(0.15);

@@ -43,14 +43,14 @@ public class VisionSubsystem extends Subsystem {
                 .setModelLabels(LABELS)
                 .setIsModelQuantized(true)
                 .setModelInputSize(969)
-                .setModelAspectRatio(1)
+                .setModelAspectRatio(16.0 / 9.0)
                 .build();
 
         tfod.setMinResultConfidence(0.75f);
 
         visionPortal = new VisionPortal.Builder()
             .setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"))
-            .setCameraResolution(new Size(320, 320))
+            .setCameraResolution(new Size(640, 480))
             .enableLiveView(true)
             .setAutoStopLiveView(true)
             .addProcessor(tfod)
